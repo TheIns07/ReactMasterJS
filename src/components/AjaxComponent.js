@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 export const AjaxComponent = () => {
     const [usuarios, setUsuarios] = useState([]);
+    const [cargando, setCargando] = useState(true)
 
     const getStaticUsers = () => {
         setUsuarios([
@@ -29,21 +30,60 @@ export const AjaxComponent = () => {
         ])
     }
 
+    const getUsuariosAJAX = () => {
+        fetch("https://reqres.in/api/users?page=1")
+        .then(respuesta => respuesta.json())
+        .then(resultado_final => {
+            setUsuarios(resultado_final.data)
+            console.log(usuarios)
+        }, error => {
+            console.log("Error en la petición")
+        })
+    }
+
+    const getUsuariosAjaxAA = () => {
+        setTimeout(async () => {
+            const peticion = await fetch("https://reqres.in/api/users?page=2")
+            const {data} = await peticion.json();
+    
+            setUsuarios(data)
+            setCargando(false);
+        }, 2000)
+        
+    }
+
     useEffect(() => {
-        getStaticUsers();
+        //getStaticUsers();
+        getUsuariosAjaxAA();
+
     }, [])
 
-    return (
+    if(cargando === true){
+        return (
+            <div className='cargandodatos'>
+                cargando datos...
+            </div>
+        )
+    } else {
+        return (
         <div>
             <h2>Listado de usuarios via Ajax</h2>
             <ol className='usuarios'>
                 {
                     usuarios.map(usuario => {
-                        return <li key={usuario.id}>{usuario.first_name} {usuario.last_name}</li>
+                        return <li key={usuario.id}> <img src = {usuario.avatar}></img>
+                            {usuario.first_name} {usuario.last_name}
+                                   
+                        </li>
                     })
                 }
             </ol>
 
         </div>
     )
+
+    }
+    
+
+    
 }
