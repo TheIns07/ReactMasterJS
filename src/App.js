@@ -1,12 +1,9 @@
-import logo from './logo.svg';
 import './App.css';
-
+import {PruebasComponent} from './components/PruebasComponent'
 function App() {
-  const [usuario, setUsuario] = useState("Arturo Cervantes")
   return (
     <div className="App">
-        <img src={logo} className="App-logo" alt="logo" />
-
+        <PruebasComponent/>
     </div>
   );
 }
