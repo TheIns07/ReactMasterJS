@@ -1,6 +1,7 @@
-# Getting Started with Create React App
+# Curso de ReactJS Master en Udemy
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este es el principio del curso Master en React donde se aprendera Hooks, MERN, NodeJS, JWT+.
+
 
 ## Available Scripts
 
